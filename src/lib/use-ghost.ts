@@ -5,6 +5,8 @@ export function usePosts(options?: {
   page?: number
   limit?: number
   tag?: string
+  order?: string
+  filter?: string
 }) {
   return useQuery({
     queryKey: ["ghost", "posts", options],

@@ -79,10 +79,19 @@ export async function getPosts(options?: {
   page?: number
   limit?: number
   tag?: string
+  order?: string
+  filter?: string
 }) {
-  const { page = 1, limit = 10, tag } = options ?? {}
+  const { page = 1, limit = 10, tag, order, filter } = options ?? {}
   let path = `posts/?include=tags,authors&page=${page}&limit=${limit}`
-  if (tag) path += `&filter=tag:${tag}`
+
+  const filterParts: string[] = []
+  if (tag) filterParts.push(`tag:${tag}`)
+  if (filter) filterParts.push(filter)
+  if (filterParts.length > 0) path += `&filter=${filterParts.join("+")}`
+
+  if (order) path += `&order=${encodeURIComponent(order)}`
+
   return ghostFetch<GhostResponse<GhostPost>>(path)
 }
 

@@ -1,16 +1,48 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { Link } from "@tanstack/react-router"
+import { BlogToolbar } from "@/components/blog-toolbar"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { buildDateFilter } from "@/lib/ghost-filters"
 import { usePosts, useTags } from "@/lib/use-ghost"
 
 export function BlogListingPage() {
   const [page, setPage] = useState(1)
   const [activeTag, setActiveTag] = useState<string | undefined>()
-  const { data, isLoading } = usePosts({ page, limit: 10, tag: activeTag })
-  const { data: tags } = useTags()
-  const posts = data?.posts ?? []
+  const [sort, setSort] = useState<"newest" | "oldest">("newest")
+  const [year, setYear] = useState<number | undefined>()
+  const [month, setMonth] = useState<number | undefined>()
+  const [searchQuery, setSearchQuery] = useState("")
+
+  const order = sort === "oldest" ? "published_at asc" : "published_at desc"
+  const dateFilter = buildDateFilter(year, month)
+
+  const { data, isLoading } = usePosts({
+    page: searchQuery ? 1 : page,
+    limit: searchQuery ? 100 : 10,
+    tag: activeTag,
+    order,
+    filter: dateFilter,
+  })
+
+  const allPosts = data?.posts ?? []
   const pagination = data?.meta?.pagination
+
+  const posts = useMemo(() => {
+    if (!searchQuery.trim()) return allPosts
+    const words = searchQuery
+      .toLowerCase()
+      .split(/\s+/)
+      .filter((w) => w.length > 0)
+    return allPosts.filter((post) => {
+      const title = post.title.toLowerCase()
+      return words.some((word) => title.includes(word))
+    })
+  }, [allPosts, searchQuery])
+
+  function resetPage() {
+    setPage(1)
+  }
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
@@ -19,34 +51,31 @@ export function BlogListingPage() {
         Commentary on the political life of trees.
       </p>
 
-      {/* Tag filters */}
-      {tags && tags.length > 0 && (
-        <div className="mb-8 flex flex-wrap gap-2">
-          <Button
-            variant={activeTag === undefined ? "default" : "outline"}
-            size="sm"
-            onClick={() => {
-              setActiveTag(undefined)
-              setPage(1)
-            }}
-          >
-            All
-          </Button>
-          {tags.map((tag) => (
-            <Button
-              key={tag.id}
-              variant={activeTag === tag.slug ? "default" : "outline"}
-              size="sm"
-              onClick={() => {
-                setActiveTag(tag.slug)
-                setPage(1)
-              }}
-            >
-              {tag.name}
-            </Button>
-          ))}
-        </div>
-      )}
+      <BlogToolbar
+        tags={useTags().data ?? []}
+        activeTag={activeTag}
+        sort={sort}
+        year={year}
+        month={month}
+        searchQuery={searchQuery}
+        onTagChange={(tag) => {
+          setActiveTag(tag)
+          resetPage()
+        }}
+        onSortChange={(s) => {
+          setSort(s)
+          resetPage()
+        }}
+        onYearChange={(y) => {
+          setYear(y)
+          resetPage()
+        }}
+        onMonthChange={(m) => {
+          setMonth(m)
+          resetPage()
+        }}
+        onSearchChange={setSearchQuery}
+      />
 
       {/* Posts */}
       {isLoading ? (
@@ -55,7 +84,7 @@ export function BlogListingPage() {
         </div>
       ) : posts.length === 0 ? (
         <div className="text-muted-foreground py-12 text-center">
-          No posts yet. Check back soon.
+          No posts found.
         </div>
       ) : (
         <div className="space-y-8">
@@ -103,8 +132,8 @@ export function BlogListingPage() {
         </div>
       )}
 
-      {/* Pagination */}
-      {pagination && pagination.pages > 1 && (
+      {/* Pagination — hidden during search since we fetch all */}
+      {!searchQuery && pagination && pagination.pages > 1 && (
         <div className="mt-10 flex items-center justify-center gap-4">
           <Button
             variant="outline"
