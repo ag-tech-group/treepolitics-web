@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router"
 import { ArrowLeft } from "lucide-react"
-import { AuthorBio } from "@/components/author-bio"
 import { usePost } from "@/lib/use-ghost"
 import { sanitizeHtml } from "@/lib/sanitize"
 
@@ -52,6 +51,12 @@ export function BlogPostPage({ slug }: { slug: string }) {
               <span>{post.reading_time} min read</span>
             </>
           )}
+          {post.primary_author && (
+            <>
+              <span>&middot;</span>
+              <span>{post.primary_author.name}</span>
+            </>
+          )}
         </div>
         {post.tags.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-2">
@@ -82,9 +87,29 @@ export function BlogPostPage({ slug }: { slug: string }) {
         dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.html) }}
       />
 
-      <footer className="mt-12 border-t pt-8">
-        <AuthorBio />
-      </footer>
+      {post.primary_author && (
+        <footer className="mt-12 border-t pt-8">
+          <div className="flex items-center gap-4">
+            {post.primary_author.profile_image ? (
+              <img
+                src={post.primary_author.profile_image}
+                alt={post.primary_author.name}
+                className="h-14 w-14 rounded-full object-cover"
+              />
+            ) : (
+              <div className="bg-muted h-14 w-14 shrink-0 rounded-full" />
+            )}
+            <div>
+              <p className="font-semibold">{post.primary_author.name}</p>
+              {post.primary_author.bio && (
+                <p className="text-muted-foreground mt-1 text-sm">
+                  {post.primary_author.bio}
+                </p>
+              )}
+            </div>
+          </div>
+        </footer>
+      )}
     </article>
   )
 }
