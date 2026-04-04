@@ -9,10 +9,7 @@ import { createRoot } from "react-dom/client"
 import { toast } from "sonner"
 import { ThemeProvider } from "./components/theme-provider"
 import "./index.css"
-import { AnalyticsProvider } from "./lib/analytics"
 import { getErrorMessage } from "./lib/api-errors"
-import { AuthProvider, useAuth } from "./lib/auth"
-import { FeatureFlagProvider } from "./lib/feature-flags"
 import { routeTree } from "./routeTree.gen"
 
 const queryClient = new QueryClient({
@@ -56,23 +53,11 @@ declare module "@tanstack/react-query" {
   }
 }
 
-function App() {
-  const auth = useAuth()
-  if (auth.isLoading) return null
-  return <RouterProvider router={router} context={{ auth }} />
-}
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="system" storageKey="app_theme">
-        <AuthProvider>
-          <AnalyticsProvider>
-            <FeatureFlagProvider>
-              <App />
-            </FeatureFlagProvider>
-          </AnalyticsProvider>
-        </AuthProvider>
+      <ThemeProvider defaultTheme="system" storageKey="treepolitics_theme">
+        <RouterProvider router={router} />
       </ThemeProvider>
     </QueryClientProvider>
   </StrictMode>

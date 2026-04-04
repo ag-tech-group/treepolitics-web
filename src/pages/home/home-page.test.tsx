@@ -7,18 +7,15 @@ describe("HomePage", () => {
     await renderWithFileRoutes(<div />, { initialLocation: "/" })
 
     expect(
-      screen.getByRole("heading", { name: /react stack/i })
+      screen.getByRole("heading", { name: /tree politics/i })
     ).toBeInTheDocument()
   })
 
-  it("renders navigation links", async () => {
+  it("renders the hero call-to-action", async () => {
     await renderWithFileRoutes(<div />, { initialLocation: "/" })
 
     expect(
-      screen.getByRole("link", { name: /tanstack router/i })
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole("link", { name: /shadcn\/ui/i })
+      screen.getByRole("link", { name: /read the blog/i })
     ).toBeInTheDocument()
   })
 })
