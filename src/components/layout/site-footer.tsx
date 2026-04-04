@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router"
+import { SocialLinks } from "@/components/social-links"
 import { Separator } from "@/components/ui/separator"
 
 const quickLinks = [
@@ -6,12 +7,6 @@ const quickLinks = [
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
-] as const
-
-const socialLinks = [
-  { label: "YouTube", href: "#" },
-  { label: "TikTok", href: "#" },
-  { label: "Twitter/X", href: "#" },
 ] as const
 
 export function SiteFooter() {
@@ -59,20 +54,7 @@ export function SiteFooter() {
             <h3 className="mb-3 text-sm font-semibold tracking-wider uppercase">
               Follow
             </h3>
-            <ul className="space-y-2">
-              {socialLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <SocialLinks className="flex gap-4" />
           </div>
         </div>
 

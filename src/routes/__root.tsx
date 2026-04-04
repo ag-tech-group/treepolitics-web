@@ -29,15 +29,9 @@ interface RouterContext {
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootComponent,
-  notFoundComponent: () => (
-    <SiteLayout>
-      <NotFound />
-    </SiteLayout>
-  ),
+  notFoundComponent: () => <NotFound />,
   errorComponent: ({ error, reset }) => (
-    <SiteLayout>
-      <RootErrorComponent error={error} reset={reset} />
-    </SiteLayout>
+    <RootErrorComponent error={error} reset={reset} />
   ),
 })
 

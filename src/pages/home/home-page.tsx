@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router"
 import { ArrowRight } from "lucide-react"
+import { AuthorBio } from "@/components/author-bio"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { usePosts } from "@/lib/use-ghost"
@@ -35,14 +36,8 @@ export function HomePage() {
       {/* Recent Posts */}
       {posts.length > 0 && (
         <section className="mx-auto w-full max-w-5xl px-6 pb-16">
-          <div className="mb-8 flex items-center justify-between">
+          <div className="mb-8">
             <h2 className="text-2xl tracking-wide">Recent Posts</h2>
-            <Link
-              to="/blog"
-              className="text-primary hover:text-primary/80 text-sm font-medium transition-colors"
-            >
-              View all &rarr;
-            </Link>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
@@ -79,6 +74,12 @@ export function HomePage() {
           </div>
         </section>
       )}
+
+      {/* About */}
+      <section className="mx-auto w-full max-w-5xl px-6 pb-20">
+        <h2 className="mb-8 text-2xl tracking-wide">About the Author</h2>
+        <AuthorBio />
+      </section>
     </div>
   )
 }
