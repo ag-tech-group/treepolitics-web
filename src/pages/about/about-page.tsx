@@ -6,7 +6,7 @@ export function AboutPage() {
       {/* Mission */}
       <section className="mb-16">
         <h1 className="mb-6 text-3xl tracking-wide sm:text-4xl">Our Mission</h1>
-        <div className="prose prose-lg dark:prose-invert prose-headings:font-serif max-w-none">
+        <div className="prose prose-lg dark:prose-invert prose-headings:font-heading max-w-none">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
