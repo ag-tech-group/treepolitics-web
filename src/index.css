@@ -6,7 +6,11 @@
 
 :root {
   --radius: 0.625rem;
-  --font-serif: "Times New Roman", Times, Georgia, serif;
+
+  /* Brand fonts — Lora (warm serif) for both headings and body. Split into
+     two vars so heading/body can diverge later without a site-wide refactor. */
+  --font-heading: "Lora", Georgia, serif;
+  --font-body: "Lora", Georgia, serif;
 
   /* Green candidates — change --tp-green to compare */
   --tp-green-mint: #4ade80;
@@ -84,7 +88,8 @@
 }
 
 @theme inline {
-  --font-serif: var(--font-serif);
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -130,7 +135,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-serif antialiased;
+    @apply bg-background text-foreground font-body antialiased;
   }
 
   h1,
@@ -139,7 +144,7 @@
   h4,
   h5,
   h6 {
-    @apply font-serif;
+    @apply font-heading;
   }
 }
 

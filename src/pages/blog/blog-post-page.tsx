@@ -83,7 +83,7 @@ export function BlogPostPage({ slug }: { slug: string }) {
       )}
 
       <div
-        className="prose-ghost prose prose-lg dark:prose-invert prose-headings:font-serif prose-headings:tracking-wide prose-a:text-primary max-w-none"
+        className="prose-ghost prose prose-lg dark:prose-invert prose-headings:font-heading prose-headings:tracking-wide prose-a:text-primary max-w-none"
         dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.html) }}
       />
 
