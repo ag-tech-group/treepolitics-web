@@ -2,9 +2,7 @@ import { lazy, Suspense } from "react"
 import { QueryClient } from "@tanstack/react-query"
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router"
 import { Toaster } from "sonner"
-import { RootErrorComponent } from "@/components/error-boundary"
 import { SiteLayout } from "@/components/layout/site-layout"
-import { NotFound } from "@/components/not-found"
 
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null
@@ -29,10 +27,6 @@ interface RouterContext {
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootComponent,
-  notFoundComponent: () => <NotFound />,
-  errorComponent: ({ error, reset }) => (
-    <RootErrorComponent error={error} reset={reset} />
-  ),
 })
 
 function RootComponent() {
