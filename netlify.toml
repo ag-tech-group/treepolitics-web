@@ -1,0 +1,33 @@
+# Netlify configuration for treepolitics-web.
+# Build settings, SPA routing, security headers, and non-secret build-time env
+# vars live here (single source of truth) rather than in the Netlify dashboard.
+
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+  PNPM_VERSION = "10"
+
+# Public, non-secret build-time config. The Ghost Content API key is injected as
+# a Netlify environment variable (VITE_GHOST_CONTENT_KEY) so it stays out of git.
+[context.production.environment]
+  VITE_API_URL = "https://api.treepolitics.net"
+  VITE_GHOST_URL = "https://content.treepolitics.net"
+
+# SPA fallback: serve index.html for any path so client-side routing works.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Baseline security headers for all responses.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Strict-Transport-Security = "max-age=31536000"
