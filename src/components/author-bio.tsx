@@ -5,7 +5,10 @@ export function AuthorBio() {
       <div>
         <h3 className="text-xl font-semibold">Will Thomson</h3>
         <p className="text-muted-foreground mt-2 leading-relaxed">
-          Half man, half tree, all heart.
+          Will is a certified arborist and landscape designer. He holds an MSc
+          in Environmental Science from the American University of Beirut and an
+          MLA from the Spitzer School of Architecture, and is a certified hater
+          of using trees to score political points.
         </p>
       </div>
     </div>
