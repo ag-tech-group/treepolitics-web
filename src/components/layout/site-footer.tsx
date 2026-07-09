@@ -25,8 +25,8 @@ export function SiteFooter() {
               <span className="text-lg font-semibold">Tree Politics</span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              The use and abuse of trees in history. Political ecology through
-              an arborist's lens.
+              Woody Political Ecology, the use and abuse of trees in history,
+              and tree facts to impress your friends
             </p>
           </div>
 

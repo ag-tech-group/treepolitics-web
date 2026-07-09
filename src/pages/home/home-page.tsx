@@ -22,8 +22,8 @@ export function HomePage() {
           Tree Politics
         </h1>
         <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed lg:text-xl">
-          The use and abuse of trees in history. Political ecology through an
-          arborist's lens.
+          Woody Political Ecology, the use and abuse of trees in history, and
+          tree facts to impress your friends
         </p>
         <Button asChild size="lg" className="mt-2">
           <Link to="/blog">
