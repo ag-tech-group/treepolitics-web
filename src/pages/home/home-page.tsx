@@ -18,9 +18,7 @@ export function HomePage() {
           alt="Tree Politics"
           className="h-32 w-32 rounded-xl lg:h-40 lg:w-40"
         />
-        <h1 className="text-4xl tracking-wide sm:text-5xl lg:text-6xl">
-          Tree Politics
-        </h1>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl">Tree Politics</h1>
         <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed lg:text-xl">
           Woody Political Ecology, the use and abuse of trees in history, and
           tree facts to impress your friends
@@ -37,7 +35,7 @@ export function HomePage() {
       {posts.length > 0 && (
         <section className="mx-auto w-full max-w-5xl px-6 pb-16">
           <div className="mb-8">
-            <h2 className="text-2xl tracking-wide">Recent Posts</h2>
+            <h2 className="text-2xl">Recent Posts</h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
@@ -77,7 +75,7 @@ export function HomePage() {
 
       {/* About */}
       <section className="mx-auto w-full max-w-5xl px-6 pb-20">
-        <h2 className="mb-8 text-2xl tracking-wide">About the Author</h2>
+        <h2 className="mb-8 text-2xl">About the Author</h2>
         <AuthorBio />
       </section>
     </div>

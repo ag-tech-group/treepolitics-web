@@ -46,7 +46,7 @@ export function BlogListingPage() {
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl tracking-wide sm:text-4xl">Blog</h1>
+      <h1 className="mb-2 text-3xl sm:text-4xl">Blog</h1>
       <p className="text-muted-foreground mb-8">
         Commentary on the political life of trees.
       </p>

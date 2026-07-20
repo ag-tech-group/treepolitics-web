@@ -16,7 +16,7 @@ export function ContactPage() {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 py-12 sm:px-6">
-      <h1 className="mb-2 text-3xl tracking-wide sm:text-4xl">Contact</h1>
+      <h1 className="mb-2 text-3xl sm:text-4xl">Contact</h1>
       <p className="text-muted-foreground mb-8">
         Have a question or want to get in touch? Follow along on social media or
         send a message below.
@@ -24,13 +24,13 @@ export function ContactPage() {
 
       {/* Social Links */}
       <section className="mb-12">
-        <h2 className="mb-4 text-xl tracking-wide">Find Us Online</h2>
+        <h2 className="mb-4 text-xl">Find Us Online</h2>
         <SocialLinks className="flex gap-5" />
       </section>
 
       {/* Contact Form */}
       <section>
-        <h2 className="mb-4 text-xl tracking-wide">Send a Message</h2>
+        <h2 className="mb-4 text-xl">Send a Message</h2>
         {submitted ? (
           <Card>
             <CardContent className="py-12 text-center">

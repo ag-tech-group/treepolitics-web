@@ -34,7 +34,7 @@ export function BlogPostPage({ slug }: { slug: string }) {
       </Link>
 
       <header className="mb-10">
-        <h1 className="mb-4 text-3xl leading-tight tracking-wide sm:text-4xl lg:text-5xl">
+        <h1 className="mb-4 text-3xl leading-tight sm:text-4xl lg:text-5xl">
           {post.title}
         </h1>
         <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-sm">
@@ -83,7 +83,7 @@ export function BlogPostPage({ slug }: { slug: string }) {
       )}
 
       <div
-        className="prose-ghost prose prose-lg dark:prose-invert prose-headings:font-heading prose-headings:tracking-wide prose-a:text-primary max-w-none"
+        className="prose-ghost prose prose-lg dark:prose-invert prose-headings:font-heading prose-a:text-primary max-w-none"
         dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.html) }}
       />
 

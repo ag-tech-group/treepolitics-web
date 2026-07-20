@@ -7,10 +7,15 @@
 :root {
   --radius: 0.625rem;
 
-  /* Brand fonts — Lora (warm serif) for both headings and body. Split into
-     two vars so heading/body can diverge later without a site-wide refactor. */
-  --font-heading: "Lora", Georgia, serif;
+  /* Brand fonts — Fraunces (soft display serif) for headings, Lora (warm
+     serif) for body. Fraunces' SOFT/WONK axes are tuned in @layer base. */
+  --font-heading: "Fraunces", "Lora", Georgia, serif;
   --font-body: "Lora", Georgia, serif;
+
+  /* Texture knobs — paper grain overlays the page shell; wood tints the
+     header/footer accent strips. */
+  --paper-opacity: 0.14;
+  --wood: oklch(0.48 0.055 60);
 
   /* Green candidates — change --tp-green to compare */
   --tp-green-mint: #4ade80;
@@ -34,8 +39,11 @@
   --accent-foreground: oklch(0.25 0.01 50);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.9 0.005 100);
-  --input: oklch(0.9 0.005 100);
+  --border: oklch(0.86 0.025 80);
+  --input: oklch(0.86 0.025 80);
+  /* Warm-toned card lift — replaces the neutral shadow-sm on Card. */
+  --shadow-card:
+    0 1px 2px oklch(0.35 0.05 65 / 0.1), 0 3px 12px oklch(0.35 0.05 65 / 0.07);
   --ring: var(--tp-green);
   --chart-1: var(--tp-green);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -53,6 +61,8 @@
 }
 
 .dark {
+  --paper-opacity: 0.11;
+  --wood: oklch(0.34 0.045 55);
   --background: oklch(0.16 0.01 50);
   --foreground: oklch(0.95 0.005 80);
   --card: oklch(0.19 0.01 50);
@@ -69,8 +79,9 @@
   --accent-foreground: oklch(0.95 0.005 80);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.28 0.01 50);
-  --input: oklch(0.28 0.01 50);
+  --border: oklch(0.31 0.02 60);
+  --input: oklch(0.31 0.02 60);
+  --shadow-card: 0 1px 2px oklch(0 0 0 / 0.5), 0 3px 12px oklch(0 0 0 / 0.35);
   --ring: var(--tp-green);
   --chart-1: var(--tp-green);
   --chart-2: oklch(0.696 0.17 162.48);
@@ -145,7 +156,43 @@
   h5,
   h6 {
     @apply font-heading;
+    /* Fraunces wants tighter tracking than Lora did; SOFT rounds the
+       terminals (0-100), WONK swaps in angled/wonky alternates (0 or 1). */
+    letter-spacing: -0.015em;
+    font-variation-settings:
+      "SOFT" 30,
+      "WONK" 0;
   }
+
+  h1 {
+    font-variation-settings:
+      "SOFT" 60,
+      "WONK" 1;
+  }
+}
+
+/* Paper-grain shell — SVG fractal noise behind content, above the page
+   background. Tune strength via --paper-opacity. */
+.texture-paper {
+  position: relative;
+  isolation: isolate;
+}
+
+.texture-paper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--paper-opacity);
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>");
+}
+
+/* Wood accent — walnut base with horizontal grain streaks (low x-frequency
+   turbulence stretches the noise into fibers). Used as thin strips. */
+.texture-wood {
+  background-color: var(--wood);
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='60'><filter id='w'><feTurbulence type='fractalNoise' baseFrequency='0.006 0.14' numOctaves='3' seed='7' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23w)' opacity='0.4'/></svg>");
 }
 
 /* Ghost Content API HTML styling */
