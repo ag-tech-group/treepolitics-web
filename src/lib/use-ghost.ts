@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getPost, getPosts, getPage, getTags } from "@/api/ghost"
+import { getAuthor, getPost, getPosts, getPage, getTags } from "@/api/ghost"
 
 export function usePosts(options?: {
   page?: number
@@ -34,5 +34,13 @@ export function useTags() {
   return useQuery({
     queryKey: ["ghost", "tags"],
     queryFn: getTags,
+  })
+}
+
+export function useAuthor(slug: string) {
+  return useQuery({
+    queryKey: ["ghost", "author", slug],
+    queryFn: () => getAuthor(slug),
+    enabled: !!slug,
   })
 }
