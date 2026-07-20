@@ -11,7 +11,8 @@ const quickLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-muted/50 border-t">
+    <footer className="bg-muted/50">
+      <div aria-hidden="true" className="texture-wood h-1.5" />
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {/* Brand */}
@@ -22,7 +23,9 @@ export function SiteFooter() {
                 alt="Tree Politics"
                 className="h-12 w-12 rounded-md"
               />
-              <span className="text-lg font-semibold">Tree Politics</span>
+              <span className="font-heading text-lg font-semibold">
+                Tree Politics
+              </span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Woody Political Ecology, the use and abuse of trees in history,
@@ -32,7 +35,7 @@ export function SiteFooter() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="mb-3 text-sm font-semibold tracking-wider uppercase">
+            <h3 className="font-body mb-3 text-sm font-semibold tracking-wider uppercase">
               Quick Links
             </h3>
             <ul className="space-y-2">
@@ -51,7 +54,7 @@ export function SiteFooter() {
 
           {/* Social */}
           <div>
-            <h3 className="mb-3 text-sm font-semibold tracking-wider uppercase">
+            <h3 className="font-body mb-3 text-sm font-semibold tracking-wider uppercase">
               Follow
             </h3>
             <SocialLinks className="flex gap-4" />

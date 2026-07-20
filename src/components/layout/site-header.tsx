@@ -43,7 +43,9 @@ function MobileNav() {
                 alt="Tree Politics"
                 className="h-10 w-10 rounded-md"
               />
-              <span className="text-base font-semibold">Tree Politics</span>
+              <span className="font-heading text-base font-semibold">
+                Tree Politics
+              </span>
             </Link>
           </SheetTitle>
         </SheetHeader>
@@ -71,7 +73,7 @@ function MobileNav() {
 
 export function SiteHeader() {
   return (
-    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
+    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center gap-3">
@@ -80,7 +82,7 @@ export function SiteHeader() {
               alt="Tree Politics"
               className="h-9 w-9 rounded-md"
             />
-            <span className="text-lg font-semibold tracking-wide">
+            <span className="font-heading text-lg font-semibold">
               Tree Politics
             </span>
           </Link>
@@ -105,6 +107,7 @@ export function SiteHeader() {
           <MobileNav />
         </div>
       </div>
+      <div aria-hidden="true" className="texture-wood h-1.5" />
     </header>
   )
 }

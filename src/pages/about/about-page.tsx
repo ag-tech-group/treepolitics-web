@@ -5,9 +5,7 @@ export function AboutPage() {
     <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
       {/* Why Tree Politics */}
       <section className="mb-16">
-        <h1 className="mb-6 text-3xl tracking-wide sm:text-4xl">
-          Why Tree Politics?
-        </h1>
+        <h1 className="mb-6 text-3xl sm:text-4xl">Why Tree Politics?</h1>
         <div className="prose prose-lg dark:prose-invert prose-headings:font-heading max-w-none">
           <p>
             "Trees are the answer" read the bumper sticker on the back of my
@@ -30,7 +28,7 @@ export function AboutPage() {
 
       {/* Author */}
       <section>
-        <h2 className="mb-8 text-2xl tracking-wide">About the Author</h2>
+        <h2 className="mb-8 text-2xl">About the Author</h2>
         <AuthorBio />
       </section>
     </div>
