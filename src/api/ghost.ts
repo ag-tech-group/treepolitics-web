@@ -54,6 +54,7 @@ interface GhostResponse<T> {
   posts?: T[]
   pages?: T[]
   tags?: T[]
+  authors?: T[]
   meta: {
     pagination: {
       page: number
@@ -112,4 +113,11 @@ export async function getPage(slug: string) {
 export async function getTags() {
   const data = await ghostFetch<GhostResponse<GhostTag>>("tags/?limit=all")
   return data.tags ?? []
+}
+
+export async function getAuthor(slug: string) {
+  const data = await ghostFetch<GhostResponse<GhostAuthor>>(
+    `authors/slug/${slug}/`
+  )
+  return data.authors?.[0] ?? null
 }
