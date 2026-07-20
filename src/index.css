@@ -201,7 +201,9 @@
 }
 
 .prose-ghost .kg-embed-card iframe {
-  @apply aspect-video w-full rounded-lg;
+  /* h-auto releases the oEmbed height attribute so aspect-video can govern —
+     with an explicit height, CSS aspect-ratio is ignored entirely. */
+  @apply aspect-video h-auto w-full rounded-lg;
 }
 
 .prose-ghost figcaption {
