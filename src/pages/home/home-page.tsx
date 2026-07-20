@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router"
 import { ArrowRight } from "lucide-react"
 import { AuthorBio } from "@/components/author-bio"
+import { TreeRings } from "@/components/tree-rings"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { usePosts } from "@/lib/use-ghost"
@@ -11,24 +12,27 @@ export function HomePage() {
 
   return (
     <div className="flex flex-1 flex-col">
-      {/* Hero */}
-      <section className="flex flex-col items-center justify-center gap-6 px-6 py-20 text-center lg:py-32">
-        <img
-          src="/images/treepolitics_logo.png"
-          alt="Tree Politics"
-          className="h-32 w-32 rounded-xl lg:h-40 lg:w-40"
-        />
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl">Tree Politics</h1>
-        <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed lg:text-xl">
-          Woody Political Ecology, the use and abuse of trees in history, and
-          tree facts to impress your friends
-        </p>
-        <Button asChild size="lg" className="mt-2">
-          <Link to="/blog">
-            Read the Blog
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
+      {/* Hero — tree-ring cross-section; rings record history the way the
+          blog does. */}
+      <section className="px-6 py-16 lg:py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,480px)]">
+          <div className="text-center lg:text-left">
+            <h1 className="text-6xl leading-[0.95] sm:text-7xl lg:text-8xl">
+              Tree <span className="block">Politics</span>
+            </h1>
+            <p className="text-muted-foreground mx-auto mt-6 max-w-xl text-lg leading-relaxed lg:mx-0 lg:text-xl">
+              Woody Political Ecology, the use and abuse of trees in history,
+              and tree facts to impress your friends
+            </p>
+            <Button asChild size="lg" className="mt-8">
+              <Link to="/blog">
+                Read the Blog
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+          <TreeRings className="mx-auto w-72 max-w-full sm:w-96 lg:w-full" />
+        </div>
       </section>
 
       {/* Recent Posts */}

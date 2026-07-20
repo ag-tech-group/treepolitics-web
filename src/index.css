@@ -13,9 +13,13 @@
   --font-body: "Lora", Georgia, serif;
 
   /* Texture knobs — paper grain overlays the page shell; wood tints the
-     header/footer accent strips. */
+     header/footer accent strips; ring-ink draws the hero cross-section. */
   --paper-opacity: 0.14;
   --wood: oklch(0.48 0.055 60);
+  --ring-ink: oklch(0.42 0.055 60);
+  /* Pith disc behind the hero woodcut — stays light in both modes so the
+     black-ink figures remain visible. */
+  --pith: oklch(0.95 0.02 85);
 
   /* Green candidates — change --tp-green to compare */
   --tp-green-mint: #4ade80;
@@ -63,6 +67,8 @@
 .dark {
   --paper-opacity: 0.11;
   --wood: oklch(0.34 0.045 55);
+  --ring-ink: oklch(0.62 0.05 60);
+  --pith: oklch(0.87 0.035 80);
   --background: oklch(0.16 0.01 50);
   --foreground: oklch(0.95 0.005 80);
   --card: oklch(0.19 0.01 50);
@@ -193,6 +199,28 @@
 .texture-wood {
   background-color: var(--wood);
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='60'><filter id='w'><feTurbulence type='fractalNoise' baseFrequency='0.006 0.14' numOctaves='3' seed='7' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23w)' opacity='0.4'/></svg>");
+}
+
+/* Hero tree-ring cross-section — rings draw in from the pith outward on
+   load (each path has pathLength=1, so dasharray/offset of 1 hides it). */
+.tree-rings path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ring-draw 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: calc(var(--ring-i, 0) * 70ms);
+}
+
+@keyframes ring-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tree-rings path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 
 /* Ghost Content API HTML styling */
