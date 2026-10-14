@@ -31,7 +31,7 @@
     "clsx": "^2.1.1",
     "dompurify": "^3.4.16",
     "ky": "^1.14.3",
-    "lucide-react": "^0.577.0",
+    "lucide-react": "^1.55.0",
     "radix-ui": "^1.7.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
